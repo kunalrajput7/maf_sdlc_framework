@@ -1,7 +1,8 @@
 """
 Application configuration — loads settings from .env file.
 
-All Azure AI Foundry credentials and deployment names are configured here.
+All Azure AI Foundry credentials, deployment names, and optional
+tool credentials are configured here.
 Copy .env.example to .env and fill in your values before running.
 """
 
@@ -16,7 +17,7 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
-    # Azure OpenAI connection
+    # Azure OpenAI connection (required)
     azure_openai_endpoint: str
     azure_openai_api_key: str
     azure_openai_api_version: str = "2024-10-21"
@@ -26,6 +27,12 @@ class Settings(BaseSettings):
     requirements_deployment: str = "gpt-4o"
     architecture_deployment: str = "gpt-4o"
     planning_deployment: str = "gpt-4o-mini"
+
+    # GitHub MCP (optional — enables repo reading)
+    github_token: str = ""
+
+    # Bing Search API (optional — enables web search tool)
+    bing_search_api_key: str = ""
 
 
 def get_settings() -> Settings:

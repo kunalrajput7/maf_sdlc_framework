@@ -22,7 +22,7 @@ class ProjectContext:
     Shared context that accumulates as agents complete their phases.
 
     Flow:
-      1. User provides project_description
+      1. User provides project_description (and optionally github_repo_url)
       2. Requirements Agent fills in: requirements
       3. Architecture Agent fills in: architecture
       4. Planning Agent fills in: project_plan
@@ -31,7 +31,9 @@ class ProjectContext:
     """
 
     # Input from user
+    project_type: str = "new"  # "new" or "existing"
     project_description: str = ""
+    github_repo_url: str = ""  # Only for existing projects
     clarifying_answers: str = ""
 
     # Phase 1 output (Requirements Agent)

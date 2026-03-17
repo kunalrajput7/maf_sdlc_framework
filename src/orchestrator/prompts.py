@@ -23,6 +23,31 @@ WELCOME_MESSAGE = """
 ╚══════════════════════════════════════════════════════════════╝
 """
 
+PROJECT_TYPE_PROMPT = """
+[bold]What type of project?[/bold]
+
+  [cyan][1][/cyan] New project from scratch
+  [cyan][2][/cyan] Enhance an existing project (provide GitHub repo URL)
+"""
+
+MISSING_ENV_MESSAGE = """
+[bold red]Missing required configuration![/bold red]
+
+MAF needs Azure AI Foundry credentials to run. Please:
+
+  1. Copy the environment template:
+     [cyan]cp .env.example .env[/cyan]
+
+  2. Fill in your Azure AI Foundry values in [cyan].env[/cyan]:
+     - AZURE_OPENAI_ENDPOINT
+     - AZURE_OPENAI_API_KEY
+
+  3. Run again:
+     [cyan]python main.py[/cyan]
+
+See [cyan]documentation.md[/cyan] for the full setup guide.
+"""
+
 PHASE_HEADERS = {
     "requirements": """
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
