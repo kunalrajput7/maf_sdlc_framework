@@ -1,26 +1,109 @@
-# MAF — AI-Powered SDLC Platform
+# APEX — AI-Powered Engineering eXperience
 
-An AI multi-agent system that helps you plan software projects from idea to sprint-ready backlog.
+**A CLI tool that turns your software idea into a sprint-ready project plan using AI agents.**
 
-## What Is This?
-
-MAF is an **AI-powered SDLC (Software Development Lifecycle) orchestration platform** that uses multiple specialized AI agents to help you plan software projects — from a simple idea to a complete, sprint-ready backlog.
-
-Instead of one generic AI chatbot, MAF uses **3 specialized agents** — each an expert in their domain — coordinated by an orchestrator that maintains context across the entire flow.
-
-Each agent is **truly agentic**: they have tools to search the web, read GitHub repos, load best-practice checklists, and validate their own output before presenting it to you.
+You describe what you want to build. Three specialized AI agents produce structured requirements, system architecture, and a sprint plan — with you approving each step.
 
 ---
 
-## The Problem We Solve
+## What You'll See
 
-Today's AI coding tools (Copilot, Cursor, Devin) are great at writing code, but nobody covers the **planning phases** that come before writing code:
+This is a **command-line tool**. You run it in your terminal, it asks you questions, and it produces markdown documents.
 
-- **Requirements gathering** — What exactly should we build?
-- **Architecture design** — How should we structure the system?
-- **Project planning** — What tasks, in what order, with what effort?
+### Running It
 
-Teams spend 40%+ of their time on these activities, yet no AI tool addresses them in a structured, connected way. MAF fills this gap.
+```bash
+$ python main.py
+```
+
+### The Terminal Experience
+
+```
+╔══════════════════════════════════════════════════════════════╗
+║        APEX — AI-Powered Engineering eXperience             ║
+║                     Phase 1 MVP                             ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                             ║
+║  This tool will help you plan your software project using   ║
+║  3 specialized AI agents:                                   ║
+║                                                             ║
+║    1. Requirements Agent  → Gathers & structures needs      ║
+║    2. Architecture Agent  → Designs system architecture     ║
+║    3. Planning Agent      → Creates sprint plan & estimates ║
+║                                                             ║
+║  You'll review and approve each phase before moving on.     ║
+║                                                             ║
+╚══════════════════════════════════════════════════════════════╝
+
+What type of project?
+  [1] New project from scratch
+  [2] Enhance an existing project (provide GitHub repo URL)
+
+> 1
+
+Describe your project idea:
+> I want to build a campus food delivery app where students can
+  order from campus restaurants and other students deliver
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  PHASE 1: REQUIREMENTS GATHERING
+  Agent: Requirements Agent (Senior Business Analyst)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generating clarifying questions...
+
+┌───────────────────── Clarifying Questions ─────────────────────┐
+│ 1. Should students pay with campus meal plans or cards?        │
+│ 2. Do you need real-time GPS tracking for deliveries?          │
+│ 3. What delivery radius from campus?                           │
+│ 4. Should restaurants manage their own menus?                  │
+│ 5. Do you need ratings and reviews?                            │
+│ 6. Mobile apps (iOS/Android) or web only?                      │
+└────────────────────────────────────────────────────────────────┘
+
+Answer the questions above:
+> Meal plans + Stripe. Yes GPS. 2km radius. Restaurant dashboard.
+  Yes ratings. Mobile iOS + Android. ~5000 students.
+
+Generating requirements document...
+
+  # Requirements Document: Campus Eats
+  ## User Personas
+  ### Hungry Student (Student Customer)
+  Goals: Order food quickly, track delivery, use meal plan...
+
+  ## User Stories (12 stories)
+  US-001: As a student, I want to browse nearby restaurant menus...
+  US-002: As a student, I want to track my delivery in real-time...
+  ...
+
+Review the output above.
+  Type 'yes' to approve and continue
+  Type 'no' to stop
+  Or type feedback to refine
+
+> yes
+
+Requirements approved. Saved to outputs/requirements.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  PHASE 2: ARCHITECTURE DESIGN
+  ...continues for all 3 phases...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+### What You Get at the End
+
+Three markdown files in the `outputs/` folder:
+
+```
+outputs/
+├── requirements.md     ← User stories, personas, functional & non-functional requirements
+├── architecture.md     ← Tech stack, API endpoints, database schema, components
+└── project_plan.md     ← Epics, stories, tasks, story points, sprint allocation
+```
+
+These are real, usable planning documents — you could hand them to a development team and they'd know exactly what to build, how to build it, and in what order.
 
 ---
 
@@ -56,9 +139,9 @@ Teams spend 40%+ of their time on these activities, yet no AI tool addresses the
 
 ### What Makes This Agentic (Not Just LLM Calls)
 
-Simple LLM pipelines just send prompts and get text back. Our agents are different:
+Simple LLM pipelines just send prompts and get text back. APEX agents are different:
 
-| Capability | Simple Pipeline | MAF Agents |
+| Capability | Simple Pipeline | APEX Agents |
 |---|---|---|
 | **Research** | Uses training data only | Searches the web for current tech benchmarks |
 | **Codebase awareness** | User describes the project | Reads actual code from GitHub via MCP |
@@ -97,7 +180,7 @@ Simple LLM pipelines just send prompts and get text back. Our agents are differe
 
 1. **Sequential flow with human gates** — Each phase must be approved before the next starts. AI proposes, you decide.
 
-2. **Shared ProjectContext** — A context object flows between agents, carrying all accumulated knowledge. This means the Architecture Agent has full access to requirements, and the Planning Agent knows both requirements AND architecture.
+2. **Shared ProjectContext** — A context object flows between agents, carrying all accumulated knowledge. The Architecture Agent has full access to requirements, and the Planning Agent knows both requirements AND architecture.
 
 3. **Structured output** — Agents produce typed, validated data (Pydantic models), not raw text. This makes agent-to-agent handoffs reliable.
 
@@ -151,97 +234,7 @@ Benefits:
 
 ---
 
-## Project Structure
-
-```
-MAF/
-├── main.py                         # Entry point — run this
-├── pyproject.toml                  # Dependencies and project config
-├── .env.example                    # Template for credentials
-│
-├── src/
-│   ├── orchestrator/               # The brain — coordinates everything
-│   │   ├── orchestrator.py         # Main orchestration logic
-│   │   ├── context.py              # Shared state between agents
-│   │   └── prompts.py              # CLI display messages
-│   │
-│   ├── agents/                     # One folder per SDLC agent
-│   │   ├── requirements/
-│   │   │   ├── agent.py            # Requirements Agent + tools
-│   │   │   └── prompts.py          # System & task prompts
-│   │   ├── architecture/
-│   │   │   ├── agent.py            # Architecture Agent + tools
-│   │   │   └── prompts.py          # System & task prompts
-│   │   └── planning/
-│   │       ├── agent.py            # Planning Agent + tools
-│   │       └── prompts.py          # System & task prompts
-│   │
-│   ├── models/                     # Shared data structures
-│   │   ├── project.py              # Core models (UserStory, Task, etc.)
-│   │   └── artifacts.py            # Document models with to_markdown()
-│   │
-│   ├── tools/                      # Agent tools
-│   │   ├── file_tool.py            # Save artifacts to disk
-│   │   ├── github_mcp.py           # GitHub MCP server connection
-│   │   ├── web_search_tool.py      # Bing web search integration
-│   │   ├── validator_tool.py       # Output validation (IDs, points, coverage)
-│   │   └── template_tool.py        # Best-practice checklists (NFR, API, risks)
-│   │
-│   └── utils/                      # Configuration and LLM setup
-│       ├── config.py               # Loads settings from .env
-│       └── llm.py                  # Creates Azure OpenAI model clients
-│
-├── outputs/                        # Generated artifacts land here
-├── examples/                       # Example usage scripts
-│   ├── new_project.py              # Plan a new project from scratch
-│   └── existing_project.py         # Plan changes to an existing project
-│
-└── tests/                          # Unit tests
-    └── test_models.py              # Tests for models and serialization
-```
-
-### How to Read the Code
-
-If you're new to this codebase, read in this order:
-
-1. **`src/models/project.py`** — Understand the data structures (UserStory, Task, Epic, etc.)
-2. **`src/models/artifacts.py`** — See how documents are structured and converted to markdown
-3. **`src/tools/`** — See what tools agents have (web search, validators, checklists, GitHub MCP)
-4. **`src/orchestrator/context.py`** — Understand the shared state between agents
-5. **`src/agents/requirements/prompts.py`** — See how we instruct agents to use their tools
-6. **`src/agents/requirements/agent.py`** — See how an agent wraps AutoGen with tools
-7. **`src/orchestrator/orchestrator.py`** — See how everything is coordinated
-8. **`main.py`** — The entry point that ties it all together
-
----
-
-## Technology Stack
-
-| Technology | Purpose |
-|---|---|
-| **AutoGen 0.4+** | Multi-agent orchestration framework (by Microsoft) |
-| **Azure AI Foundry** | Hosts the LLM deployments (GPT-4o, GPT-4o-mini) |
-| **MCP (Model Context Protocol)** | Standard protocol for agent-to-service communication |
-| **GitHub MCP Server** | Provides GitHub tools (read files, search code, etc.) |
-| **Pydantic v2** | Data validation and structured output |
-| **Rich** | Beautiful terminal output |
-| **httpx** | Async HTTP client for web search |
-| **Python 3.10+** | Language runtime |
-
-### Why AutoGen?
-
-AutoGen (part of Microsoft's Agent Framework) provides:
-- Agent abstractions (`AssistantAgent`) with built-in message handling and tool use
-- Model client connectors for Azure OpenAI
-- MCP client support for connecting to any MCP server
-- Support for structured output, tool use, and handoffs
-- Active development with strong community support
-
-We use AutoGen's agent primitives but orchestrate them with our own sequential flow (not group chat), because our 3-phase pipeline with human gates is simpler and more predictable than a dynamic group chat.
-
----
-
-## Setup Guide
+## Quick Start
 
 ### Prerequisites
 
@@ -305,28 +298,96 @@ GITHUB_TOKEN=ghp_your_github_token_here
 BING_SEARCH_API_KEY=your-bing-key-here
 ```
 
-### Step 4: (Optional) Install GitHub MCP Server
-
-If you want agents to read GitHub repos:
+### Step 4: Run
 
 ```bash
-npm install -g @modelcontextprotocol/server-github
-```
-
-The orchestrator will automatically connect to it when `GITHUB_TOKEN` is set.
-
-### Step 5: Run
-
-```bash
-# Interactive mode (recommended)
 python main.py
-
-# Or run an example
-python examples/new_project.py
-
-# Run tests
-pytest tests/
 ```
+
+---
+
+## Project Structure
+
+```
+├── main.py                         # Entry point — run this
+├── pyproject.toml                  # Dependencies and project config
+├── .env.example                    # Template for credentials
+│
+├── src/
+│   ├── orchestrator/               # The brain — coordinates everything
+│   │   ├── orchestrator.py         # Main orchestration logic
+│   │   ├── context.py              # Shared state between agents
+│   │   └── prompts.py              # CLI display messages
+│   │
+│   ├── agents/                     # One folder per SDLC agent
+│   │   ├── requirements/
+│   │   │   ├── agent.py            # Requirements Agent + tools
+│   │   │   └── prompts.py          # System & task prompts
+│   │   ├── architecture/
+│   │   │   ├── agent.py            # Architecture Agent + tools
+│   │   │   └── prompts.py          # System & task prompts
+│   │   └── planning/
+│   │       ├── agent.py            # Planning Agent + tools
+│   │       └── prompts.py          # System & task prompts
+│   │
+│   ├── models/                     # Shared data structures
+│   │   ├── project.py              # Core models (UserStory, Task, etc.)
+│   │   └── artifacts.py            # Document models with to_markdown()
+│   │
+│   ├── tools/                      # Agent tools
+│   │   ├── file_tool.py            # Save artifacts to disk
+│   │   ├── github_mcp.py           # GitHub MCP server connection
+│   │   ├── web_search_tool.py      # Bing web search integration
+│   │   ├── validator_tool.py       # Output validation (IDs, points, coverage)
+│   │   └── template_tool.py        # Best-practice checklists (NFR, API, risks)
+│   │
+│   └── utils/                      # Configuration and LLM setup
+│       ├── config.py               # Loads settings from .env
+│       └── llm.py                  # Creates Azure OpenAI model clients
+│
+├── outputs/                        # Generated artifacts (after running)
+├── examples/                       # Example usage scripts
+└── tests/                          # Unit tests
+```
+
+### How to Read the Code
+
+If you're new to this codebase, read in this order:
+
+1. **`src/models/project.py`** — Understand the data structures (UserStory, Task, Epic, etc.)
+2. **`src/models/artifacts.py`** — See how documents are structured and converted to markdown
+3. **`src/tools/`** — See what tools agents have (web search, validators, checklists, GitHub MCP)
+4. **`src/orchestrator/context.py`** — Understand the shared state between agents
+5. **`src/agents/requirements/prompts.py`** — See how we instruct agents to use their tools
+6. **`src/agents/requirements/agent.py`** — See how an agent wraps AutoGen with tools
+7. **`src/orchestrator/orchestrator.py`** — See how everything is coordinated
+8. **`main.py`** — The entry point that ties it all together
+
+---
+
+## Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| **AutoGen 0.4+** | Multi-agent orchestration framework (by Microsoft) |
+| **Azure AI Foundry** | Hosts the LLM deployments (GPT-4o, GPT-4o-mini) |
+| **MCP (Model Context Protocol)** | Standard protocol for agent-to-service communication |
+| **GitHub MCP Server** | Provides GitHub tools (read files, search code, etc.) |
+| **Pydantic v2** | Data validation and structured output |
+| **Rich** | Beautiful terminal output |
+| **httpx** | Async HTTP client for web search |
+| **Python 3.10+** | Language runtime |
+
+### Why AutoGen?
+
+AutoGen (part of Microsoft's Agent Framework) provides:
+- Agent abstractions (`AssistantAgent`) with built-in message handling and tool use
+- Model client connectors for Azure OpenAI
+- MCP client support for connecting to any MCP server
+- Support for structured output, tool use, and handoffs
+- Active development with strong community support
+
+We use AutoGen's agent primitives but orchestrate them with our own sequential flow (not group chat), because our 3-phase pipeline with human gates is simpler and more predictable than a dynamic group chat.
 
 ---
 
@@ -375,7 +436,7 @@ No. For Phase 1 MVP, the agents reason directly from the project description, th
 Not in this version. The codebase uses `AzureOpenAIChatCompletionClient`. Swapping to direct OpenAI would require changing `src/utils/llm.py` to use `OpenAIChatCompletionClient` instead.
 
 **Q: What if an agent produces bad output?**
-Agents now validate their own output before presenting it. But if something still looks wrong, type your feedback at the approval step and the agent will refine. You can iterate as many times as needed.
+Agents validate their own output before presenting it. But if something still looks wrong, type your feedback at the approval step and the agent will refine. You can iterate as many times as needed.
 
 **Q: How much does it cost to run?**
 A full 3-phase run with tool use typically uses ~15,000-30,000 tokens. With Azure GPT-4o pricing (~$5/1M input, $15/1M output tokens), that's roughly $0.10-0.25 per run.

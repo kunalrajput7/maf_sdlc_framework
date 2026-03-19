@@ -1,6 +1,6 @@
-# Contributing to MAF
+# Contributing to APEX
 
-Thank you for your interest in contributing to MAF! This guide will help you get started.
+Thank you for your interest in contributing to APEX! This guide will help you get started.
 
 ## How Can You Contribute?
 
@@ -20,8 +20,8 @@ Click the "Fork" button on GitHub. This creates your own copy of the repo.
 ### 2. Clone Your Fork
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/MAF.git
-cd MAF
+git clone https://github.com/YOUR-USERNAME/APEX.git
+cd APEX
 ```
 
 ### 3. Set Up the Development Environment

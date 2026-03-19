@@ -7,7 +7,7 @@ It manages phase transitions, user interactions, and human gates.
 
 WELCOME_MESSAGE = """
 ╔══════════════════════════════════════════════════════════════╗
-║             MAF — AI-Powered SDLC Platform                  ║
+║        APEX — AI-Powered Engineering eXperience             ║
 ║                     Phase 1 MVP                             ║
 ╠══════════════════════════════════════════════════════════════╣
 ║                                                             ║
@@ -33,7 +33,7 @@ PROJECT_TYPE_PROMPT = """
 MISSING_ENV_MESSAGE = """
 [bold red]Missing required configuration![/bold red]
 
-MAF needs Azure AI Foundry credentials to run. Please:
+APEX needs Azure AI Foundry credentials to run. Please:
 
   1. Copy the environment template:
      [cyan]cp .env.example .env[/cyan]
@@ -45,7 +45,7 @@ MAF needs Azure AI Foundry credentials to run. Please:
   3. Run again:
      [cyan]python main.py[/cyan]
 
-See [cyan]documentation.md[/cyan] for the full setup guide.
+See [cyan]README.md[/cyan] for the full setup guide.
 """
 
 PHASE_HEADERS = {

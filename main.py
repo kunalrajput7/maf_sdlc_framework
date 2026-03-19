@@ -1,5 +1,5 @@
 """
-MAF SDLC Platform — Entry Point
+APEX — AI-Powered Engineering eXperience
 
 Run this to start the interactive 3-phase SDLC flow:
     python main.py

@@ -1,4 +1,4 @@
-# MAF SDLC Platform — Current Phase (MVP)
+# APEX — Current Phase (MVP)
 
 This document explains exactly how the system works right now — every step, every tool call, every decision.
 
@@ -24,7 +24,7 @@ You review and approve each phase. Agents use tools to research, validate, and s
 $ python main.py
 
 ╔══════════════════════════════════════════════════════════════╗
-║             MAF — AI-Powered SDLC Platform                  ║
+║        APEX — AI-Powered Engineering eXperience             ║
 ║                     Phase 1 MVP                             ║
 ╠══════════════════════════════════════════════════════════════╣
 ║                                                             ║
